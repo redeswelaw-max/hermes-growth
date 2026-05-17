@@ -39,7 +39,9 @@ RUN mkdir -p /data/.hermes/{cron,sessions,logs,hooks,memories,skills,skins,plans
 # Expose Postiz Lite port so Railway assigns a public URL
 EXPOSE 5000
 
-# Start Postiz Lite in background, then Hermes gateway in foreground.
-# A small shell script is the simplest supervisor for two processes.
+# Start script that launches Postiz Lite + Hermes gateway
+COPY start.sh /opt/hermes/start.sh
+RUN chmod +x /opt/hermes/start.sh
+
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
-CMD ["sh", "-c", "python /opt/hermes/postiz-lite/main.py & exec hermes gateway"]
+CMD ["/opt/hermes/start.sh"]
