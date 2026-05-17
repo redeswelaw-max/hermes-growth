@@ -21,6 +21,7 @@ ENV PATH="/opt/hermes/.venv/bin:$PATH"
 ENV HOME=/data
 ENV HERMES_HOME=/data/.hermes
 ENV HERMES_TUI_DIR=/opt/hermes/ui-tui
+ENV HERMES_ALLOW_ROOT_GATEWAY=1
 
 # Pre-create essential directories so the container starts cleanly.
 RUN mkdir -p /data/.hermes/{cron,sessions,logs,hooks,memories,skills,skins,plans,workspace,home}
