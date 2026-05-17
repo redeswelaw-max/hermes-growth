@@ -10,6 +10,7 @@ restartPolicyMaxRetries = 10
 [deploy.env]
 HERMES_HOME = "/data/.hermes"
 HERMES_ALLOW_ROOT_GATEWAY = "1"
+GATEWAY_ALLOW_ALL_USERS = "true"
 PYTHONUNBUFFERED = "1"
 KIMI_API_KEY = "sk-kimi-dLLtefCcIELCsaejYCwJD5zd66vNOQhawc1rna5wKm4I5ALI2fYhnasRMlCtfWxC"
 KIMI_BASE_URL = "https://api.moonshot.ai/v1"
