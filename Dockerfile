@@ -30,7 +30,7 @@ ENV TELEGRAM_BOT_TOKEN=8603805979:AAH_qWK_eIrBRfX9SnBrveVI4FgH-UHA3fk
 # Postiz Lite — self-hosted microservice running inside the same container
 ENV POSTIZ_API_KEY=postiz-lite-internal-key
 ENV POSTIZ_BASE_URL=http://localhost:5000
-ENV PORT=5000
+ENV POSTIZ_PORT=5000
 ENV DB_PATH=/data/postiz_lite.db
 
 # Pre-create essential directories so the container starts cleanly.
