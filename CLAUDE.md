@@ -60,6 +60,7 @@ If Hermes releases v0.15.0, we want clean merges. Keep modifications minimal and
 | `railway.toml` | Railway config (NOT env vars) |
 | `optional-skills/growth-marketing/*/SKILL.md` | Add/modify skills |
 | `plugins/model-providers/kimi-coding/__init__.py` | Tweak Kimi provider |
+| `tools/postiz_tools.py` | Modify Postiz integration |
 | `web/` | Dashboard changes (rebuild locally after) |
 | `ui-tui/` | TUI changes (rebuild locally after) |
 
@@ -127,6 +128,14 @@ RAILWAY_API_TOKEN=... railway up
 ### Update an environment variable
 
 Edit `Dockerfile`, find the `ENV` line, change the value, commit, push, deploy.
+
+### Configure Postiz integration
+
+1. Get API key from your Postiz instance (Settings → API Keys)
+2. Add to Dockerfile: `ENV POSTIZ_API_KEY=your_key`
+3. Optionally set `ENV POSTIZ_BASE_URL=https://your-postiz-instance.com`
+4. Commit, push, deploy
+5. The `postiz_*` tools become available automatically
 
 ### Update Hermes version
 

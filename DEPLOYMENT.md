@@ -118,6 +118,8 @@ All critical variables are **baked into the Dockerfile** (`ENV` directives). Rai
 | `HERMES_ALLOW_ROOT_GATEWAY` | `1` | Required — Railway containers run as root |
 | `HERMES_HOME` | `/data/.hermes` | Runtime data directory |
 | `PYTHONUNBUFFERED` | `1` | Force Python stdout/stderr flush |
+| `POSTIZ_API_KEY` | *(empty)* | Postiz API key (optional — enables social media tools) |
+| `POSTIZ_BASE_URL` | `https://api.postiz.com` | Postiz instance URL |
 
 ### Changing environment variables
 
@@ -404,7 +406,7 @@ If token expires, get a new one at https://railway.com/account/tokens
 
 ## Future Roadmap
 
-- [ ] Postiz integration (social media scheduling skill)
+- [x] Postiz integration (social media scheduling tools + skill)
 - [ ] Add `TELEGRAM_ALLOWED_USERS` for restricted access
 - [ ] Web dashboard access (requires exposing port + HTTPS)
 - [ ] Add more providers (OpenRouter fallback)
