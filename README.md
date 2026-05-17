@@ -28,6 +28,14 @@ Use any model you want — [Nous Portal](https://portal.nousresearch.com), [Open
 
 ---
 
+> 🚀 **This fork:** `redeswelaw-max/hermes-growth` is Hermes Agent deployed on Railway as a **growth-marketing Telegram bot** powered by Kimi K2.6. It includes 42 growth-marketing skills and a custom Kimi provider.
+>
+> 📖 **For maintainers:** See [`DEPLOYMENT.md`](DEPLOYMENT.md) for deploy instructions, [`SKILLS.md`](SKILLS.md) for skill development, and [`CLAUDE.md`](CLAUDE.md) for agent context.
+>
+> 🤖 **Bot:** [@wegrowth99_bot](https://t.me/wegrowth99_bot)
+
+---
+
 ## Quick Install
 
 ### Linux, macOS, WSL2, Termux
