@@ -2,6 +2,10 @@
 # Start Postiz Lite in background, then Hermes gateway in foreground.
 set -e
 
+echo "[start] PATH=$PATH"
+echo "[start] which python: $(which python || echo 'NOT FOUND')"
+echo "[start] python version: $(python --version 2>&1 || echo 'NO PYTHON')"
+
 # Start Postiz Lite (logs go to stdout so Railway captures them)
 echo "[postiz-lite] Starting on port 5000..."
 python /opt/hermes/postiz-lite/main.py &
