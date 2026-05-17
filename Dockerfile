@@ -1,37 +1,30 @@
 FROM ghcr.io/astral-sh/uv:python3.12-bookworm-slim
 
-ARG HERMES_REF=v0.14.0
-
+# Install only tini (process supervisor).  Node.js is NOT needed because
+# web dashboard and TUI were pre-built locally and committed.
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl ca-certificates git tini && \
-    curl -fsSL https://deb.nodesource.com/setup_22.x | bash - && \
-    apt-get install -y --no-install-recommends nodejs && \
+    apt-get install -y --no-install-recommends tini && \
     rm -rf /var/lib/apt/lists/*
 
-# Clone Hermes Agent official release
-RUN git clone --depth 1 --branch ${HERMES_REF} https://github.com/NousResearch/hermes-agent.git /opt/hermes-agent && \
-    cd /opt/hermes-agent && \
-    uv pip install --system --no-cache -e ".[cron,cli,mcp,web]"
+WORKDIR /opt/hermes
 
-# Pre-build web dashboard
-RUN cd /opt/hermes-agent/web && \
-    npm install --silent && \
-    npm run build
+# Copy the full repo (Hermes source + pre-built web assets + pre-built TUI +
+# optional-skills, plugins, etc.)
+COPY . .
 
-# Pre-build TUI
-RUN cd /opt/hermes-agent/ui-tui && \
-    npm install --silent --no-fund --no-audit --progress=false && \
-    npm run build
+# Create virtualenv and install Python dependencies using the committed
+# uv.lock.  --frozen skips resolution (very fast, reproducible).
+RUN uv venv .venv && \
+    VIRTUAL_ENV=/opt/hermes/.venv uv sync --frozen --extra cli --extra mcp --extra messaging --extra web
 
-# Copy our growth-marketing skills into optional-skills
-COPY optional-skills/growth-marketing /opt/hermes-agent/optional-skills/growth-marketing
-
-# Create data directory
-RUN mkdir -p /data/.hermes
-
+ENV PATH="/opt/hermes/.venv/bin:$PATH"
 ENV HOME=/data
 ENV HERMES_HOME=/data/.hermes
-ENV HERMES_TUI_DIR=/opt/hermes-agent/ui-tui
+ENV HERMES_TUI_DIR=/opt/hermes/ui-tui
 
+# Pre-create essential directories so the container starts cleanly.
+RUN mkdir -p /data/.hermes/{cron,sessions,logs,hooks,memories,skills,skins,plans,workspace,home}
+
+# Railway injects env vars at runtime; secrets are NOT baked into the image.
 ENTRYPOINT ["/usr/bin/tini", "-g", "--"]
 CMD ["hermes", "gateway"]
