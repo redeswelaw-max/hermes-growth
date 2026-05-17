@@ -1,0 +1,16 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "./docker/entrypoint.sh hermes gateway"
+healthcheckPath = "/health"
+healthcheckTimeout = 300
+restartPolicyType = "on_failure"
+restartPolicyMaxRetries = 10
+
+[deploy.env]
+HERMES_HOME = "/opt/data"
+PYTHONUNBUFFERED = "1"
+KIMI_API_KEY = "sk-kimi-dLLtefCcIELCsaejYCwJD5zd66vNOQhawc1rna5wKm4I5ALI2fYhnasRMlCtfWxC"
+KIMI_BASE_URL = "https://api.moonshot.ai/v1"
