@@ -7,28 +7,31 @@
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────┐
-│  Railway (disciplined-eagerness)        │
-│  Service: hermes-growth                 │
-│  Region: us-east4 (iad)                 │
-│                                          │
-│  ┌─────────────────────────────────┐    │
-│  │  Container: ghcr.io/astral-sh/  │    │
-│  │  uv:python3.12-bookworm-slim    │    │
-│  │                                 │    │
-│  │  Hermes Agent v0.14.0           │    │
-│  │  ├─ Telegram Bot (polling)      │    │
-│  │  ├─ 42 growth-marketing skills  │    │
-│  │  ├─ Kimi K2.6 provider          │    │
-│  │  └─ Pre-built web dashboard     │    │
-│  └─────────────────────────────────┘    │
-│                                          │
-│  Env vars (baked in Dockerfile):        │
-│  ├─ KIMI_API_KEY                        │
-│  ├─ TELEGRAM_BOT_TOKEN                  │
-│  ├─ GATEWAY_ALLOW_ALL_USERS=true        │
-│  └─ HERMES_ALLOW_ROOT_GATEWAY=1         │
-└─────────────────────────────────────────┘
+┌─────────────────────────────────────────────┐
+│  Railway (disciplined-eagerness)            │
+│  Service: hermes-growth                     │
+│  Region: us-east4 (iad)                     │
+│                                              │
+│  ┌─────────────────────────────────────┐    │
+│  │  Container: ghcr.io/astral-sh/      │    │
+│  │  uv:python3.12-bookworm-slim        │    │
+│  │                                     │    │
+│  │  Hermes Agent v0.14.0               │    │
+│  │  ├─ Telegram Bot (polling)          │    │
+│  │  ├─ 42 growth-marketing skills      │    │
+│  │  ├─ Kimi K2.6 provider              │    │
+│  │  ├─ Postiz Lite (port 5000)         │    │
+│  │  └─ Pre-built web dashboard         │    │
+│  └─────────────────────────────────────┘    │
+│                                              │
+│  Env vars (baked in Dockerfile):            │
+│  ├─ KIMI_API_KEY                            │
+│  ├─ TELEGRAM_BOT_TOKEN                      │
+│  ├─ GATEWAY_ALLOW_ALL_USERS=true            │
+│  ├─ HERMES_ALLOW_ROOT_GATEWAY=1             │
+│  ├─ POSTIZ_API_KEY (internal)              │
+│  └─ POSTIZ_BASE_URL=http://localhost:5000  │
+└─────────────────────────────────────────────┘
            │
            ▼
     Telegram API (long-polling)
@@ -118,8 +121,9 @@ All critical variables are **baked into the Dockerfile** (`ENV` directives). Rai
 | `HERMES_ALLOW_ROOT_GATEWAY` | `1` | Required — Railway containers run as root |
 | `HERMES_HOME` | `/data/.hermes` | Runtime data directory |
 | `PYTHONUNBUFFERED` | `1` | Force Python stdout/stderr flush |
-| `POSTIZ_API_KEY` | *(empty)* | Postiz API key (optional — enables social media tools) |
-| `POSTIZ_BASE_URL` | `https://api.postiz.com` | Postiz instance URL |
+| `POSTIZ_API_KEY` | `postiz-lite-internal-key` | Postiz Lite internal API key |
+| `POSTIZ_BASE_URL` | `http://localhost:5000` | Postiz Lite runs inside the same container |
+| `POSTIZ_PORT` | `5000` | Port for Postiz Lite (avoid conflicts with Railway's PORT) |
 
 ### Changing environment variables
 

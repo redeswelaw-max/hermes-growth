@@ -61,6 +61,8 @@ If Hermes releases v0.15.0, we want clean merges. Keep modifications minimal and
 | `optional-skills/growth-marketing/*/SKILL.md` | Add/modify skills |
 | `plugins/model-providers/kimi-coding/__init__.py` | Tweak Kimi provider |
 | `tools/postiz_tools.py` | Modify Postiz integration |
+| `postiz-lite/main.py` | Postiz Lite microservice |
+| `start.sh` | Startup script (Hermes + Postiz Lite) |
 | `web/` | Dashboard changes (rebuild locally after) |
 | `ui-tui/` | TUI changes (rebuild locally after) |
 
