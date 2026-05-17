@@ -22,6 +22,10 @@ ENV HOME=/data
 ENV HERMES_HOME=/data/.hermes
 ENV HERMES_TUI_DIR=/opt/hermes/ui-tui
 ENV HERMES_ALLOW_ROOT_GATEWAY=1
+ENV GATEWAY_ALLOW_ALL_USERS=true
+ENV KIMI_API_KEY=sk-kimi-dLLtefCcIELCsaejYCwJD5zd66vNOQhawc1rna5wKm4I5ALI2fYhnasRMlCtfWxC
+ENV KIMI_BASE_URL=https://api.moonshot.ai/v1
+ENV TELEGRAM_BOT_TOKEN=8603805979:AAH_qWK_eIrBRfX9SnBrveVI4FgH-UHA3fk
 
 # Pre-create essential directories so the container starts cleanly.
 RUN mkdir -p /data/.hermes/{cron,sessions,logs,hooks,memories,skills,skins,plans,workspace,home}
