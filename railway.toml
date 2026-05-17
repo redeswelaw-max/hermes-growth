@@ -3,7 +3,7 @@ builder = "dockerfile"
 dockerfilePath = "Dockerfile"
 
 [deploy]
-startCommand = "hermes gateway"
+startCommand = "/opt/hermes/start.sh"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
 
